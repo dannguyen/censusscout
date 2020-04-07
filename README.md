@@ -1,63 +1,68 @@
-# Jekyll Data Static Site Generator
+# CensusScout
 
-sometimes you have a data project that doesn't require a database or anything non-static. Wouldn't it be nice to have a folder for the data ETL process, and a folder for the jekyll site generation, and one make task to create a jekyll site?
+https://github.com/dannguyen/censusscout
 
+preliminary notes 
 
-(just a draft of a mess, don't look into this too seriously)
+Basically, a lite version of Census Explorer that features:
 
+- Convenient flat-file CSVs and sqlite downloads
+- Original csv files from data.census.gov
+- helpful lookup tables, e.g. fips
+- Topojsons
+- Vital statistics
 
-## Getting started
+Geolevels of:
+- Nation
+- Region
+- Division
+- State
+- County
+- Congressional District
+- CSA
+- MSA
 
-Clone the repo
+AC5 ranges:
 
-### Running the data etl
+- 2006-2010
+- 2007-2011
+- 2008-2012
+- 2009-2013
+- 2010-2014
+- 2011-2015
+- 2012-2016
+- 2013-2017
+- 2014-2018
 
-The data extraction-transformation-loading stuff is all in the [./backend/](./backend) directory. This template comes with an example project to show how I envision using it.
+Comparisons:
 
-The project root directory contains a [Makefile](Makefile) with some handy shortcuts to run the ETL steps:
-
-```sh
-# collect, i.e. download and save fresh copies of the data files from online
-$ make collect
-
-# fuse, i.e. collate the raw collected data
-$ make fuse
-
-# wrangle, i.e. filter/transform the data into a usable form
-$ make wrangle
-
-# publish, i.e. any additional steps to make front-facing data, e.g. changing it to JSON, splitting it up into separate files, etc
-$ make publish
-```
-
-
-
-Note: the [Makefile](Makefile) is in the **root** of the dataproject, because some make tasks involve building the jekyll site, which includes moving stuff from [backend/data](backend/data) to `jekylldir/static/data` and `jekylldir/_data`
-
-
-### Previewing the site
-
-Preview the jekyll site with:
-
-```sh
-$ cd jekylldir
-$ bundle exec jekyll s
-```
-
-And visit it in your browser: http://127.0.0.1:4000/jekyll-datasite-template/
-
-### Building the site for Github pages
-
-This project template assumes that you have set up Github pages to use the **docs/** directory.
-
-Run this make task:
-
-```
-$ make build
-```
-
-Then git add/commit/push for the pages to go live, e.g.
-
-https://dannguyen.github.io/jekyll-datasite-template/
+2013 vs 2018
 
 
+# Documentation
+
+https://www.census.gov/programs-surveys/acs/guidance/comparing-acs-data.html
+
+
+# Manifest
+
+DP02 Selected Social Chars https://data.census.gov/cedsci/table?q=DP02&hidePreview=false&tid=ACSDP1Y2018.DP02&vintage=2018
+DP03 Selected Economic Char https://data.census.gov/cedsci/table?q=DP&tid=ACSDP1Y2018.DP03&hidePreview=false&vintage=2018
+DP04 Selected Housing https://data.census.gov/cedsci/table?q=DP&tid=ACSDP5Y2018.DP04&hidePreview=false&vintage=2018
+DP05 Demographics
+https://data.census.gov/cedsci/table?q=DP&tid=ACSDP5Y2018.DP05&hidePreview=false&vintage=2018
+
+
+# Examples urls/endpoints
+
+Just nation, divisions, and regions selected:
+
+https://data.census.gov/cedsci/table?q=DP&tid=ACSDP5Y2010.DP05&hidePreview=true&vintage=2018&g=0100000US_0200000US2,1,3,4_0300000US3,6,2,8,1,9,5,4,7
+
+
+All 20 regions, acs52010:
+
+
+
+dp05:
+https://data.census.gov/cedsci/table?tid=ACSDP5Y2010.DP05&g=0100000US,.04000.001,.050000,.50011,.160000,.310000,.330000_0200000US2,1,3,4_0300000US3,6,2,8,1,9,5,4,7&hidePreview=true
